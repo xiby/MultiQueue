@@ -1,5 +1,4 @@
-
-
+//this is written by Peng
 class _Enter_
 {
 private:
