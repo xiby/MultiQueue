@@ -22,45 +22,45 @@ int main(){
         char str[100];
         _itoa_s(i,str,10);
         string name(str);
-        process tmp(name,i+1,2*(i+1),0);
+        process tmp(name,i+1,5*(i+1),0);
         pQueue[0]->push(tmp);
     }
 
     while(true){
         bool finished=true;															//for judging whether all the queues are empty
         int index=0;
-        while(index<queueNum&&!pQueue[index++]->empty()){   
+		while (index < queueNum ){
+			if (!pQueue[index++]->empty()) {
+				finished = false;
+				break;
+			}
+		}
+		if(!finished){
             if(pQueue[index-1]->front().run(2*index)){                              //若以将时间片花完，则还要判断进程是否结束
-                cout<<(pQueue[index-1]->front()).getName()<<" served!"<<endl;
+                cout<<(pQueue[index-1]->front()).getName()<<" served in "<< index - 1<<endl;
                 if(pQueue[index-1]->front().finished()){                            //若进程已经结束，则直接pop
                     cout<<(pQueue[index-1]->front()).getName()<<" is over!"<<endl;
                     pQueue[index-1]->pop();
-                    finished=false;
-                    break;
                 }else{                                                              //若进程还未结束，则将其插入下一个队列
-                    if(!index==queueNum){                                           //若已经是最后一个队列，则直接插入队列尾
+                    if(index!=queueNum){                                           //若已经是最后一个队列，则直接插入队列尾
                         pQueue[index]->push(pQueue[index-1]->front());
                         pQueue[index-1]->pop();
                     }else{
                         pQueue[index-1]->push(pQueue[index-1]->front());
                         pQueue[index-1]->pop();
                     }
-                    finished=false;
-                    break;
                 }
             }else{                                                                  //若时间片未花完，则还应该判断进程是否结束                                                                 
-                cout<<(pQueue[index-1]->front()).getName()<<" served!"<<endl;
+                cout<<(pQueue[index-1]->front()).getName()<<" served in "<<index-1<<endl;
                 if(pQueue[index-1]->front().finished()){                            //若结束则直接pop，否则不做任何处理
                     cout<<(pQueue[index-1]->front()).getName()<<" is over!"<<endl;
                     pQueue[index-1]->pop();
                 }
-                finished=false;
-                break;
             }
-        }
-        if(finished){
-            break;                                                                      //若所有队列为空，则跳出循环
-        }
+		} else {
+			break;
+		}
+		
     }
 
     for(int i=0;i<queueNum;++i){
