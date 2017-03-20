@@ -33,6 +33,6 @@ private:
 	int serveinQueue;	//进程在某个队列中的时间
 	int endTime;		//进程结束时间
 	int rotTime;		//进程周转时间
-	int wrotTime;		//进程带权周转时间
+	double wrotTime;		//进程带权周转时间
 };
 
