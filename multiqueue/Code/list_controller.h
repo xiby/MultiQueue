@@ -1,10 +1,24 @@
+
+#ifndef list_controller__
 #define list_controller__
-#ifdef list_controller__
+#include"process.h"
+#include<queue>
+using namespace std;
 
 class list_controller
 {
+private:
+	//存储系统时间
+	int Time;
 	//缓冲池
+	queue<process> buffer_list;
 	//队列数组，STL
+	int multi_list_count;
+	queue<process> *multi_list;
+	//flags
+	bool exit_flag;
+	bool pause_flag;
+	bool new_prcess_flag;
 
 public:
 	list_controller();
@@ -17,19 +31,23 @@ public:
 	//判断系统是否需要暂停，true=TRUE
 	bool is_pause();
 	//交互界面调用方法，修改exit标记位状态
-	bool set_exit();
+	void set_exit();
 	//判断是否退出程序，true=TRUE
-	void is_exit();
+	bool is_exit();
 	//判断缓冲池中是否有新的数据
 	bool has_new_process();
 	//用于交互界面调用，响应添加事件，将process放入缓冲池
 	void set_process();
 	//从缓冲池中获取一个新的process
 	process get();
+	//将new_process放入第一级队列
+	void push(process new_process);
 	//判断运行的下一级队列，返回队列的编号
 	int which_queue();
 	//暂时暂停时间
-	void sleep(int time);
+	void sleep_(int time);
+	//执行一次（一秒）进程。
+	void run(int);
 };
 
 #endif // list_controller__

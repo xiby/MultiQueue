@@ -18,7 +18,7 @@ process::~process()
 {
 }
 
-process::process(string name, int arrivetime, int servetime,int chip=0):pName(name)
+process::process(string name, int arrivetime, int servetime):pName(name)
 {
 	arriveTime = arrivetime;
 	serveTime = servetime;

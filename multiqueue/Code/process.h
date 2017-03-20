@@ -1,6 +1,6 @@
 #include<string>
 #include<iostream>
-
+using namespace std;
 #define process__
 #ifdef process__
 class process
@@ -8,7 +8,7 @@ class process
 public:
 	process();
 	~process();
-	process(string name,int arrivetime,int servetime,int chip);
+	process(string name,int arrivetime,int servetime);
 	string getName();
 	int getserveTime();
 	int getrunTime();
