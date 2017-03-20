@@ -9,18 +9,19 @@ class process
 public:
 	process();
 	~process();
-	process(string name,int arrivetime,int servetime,int chip);
+	process(string name,int arrivetime,int servetime);
 	string getName();
 	int getserveTime();
 	int getrunTime();
-	int gettimeChip();
 	int getserveinQueue();
 	int getrotTime();
+	int getwrotTime();
 	void setserveTime(int time);
 	void setrunTime(int time);
-	void settimeChip(int time);
 	void setserveinQueue(int time);
 	void setendTime(int time);
+	void setrotTime(int time);
+	void setwrotTime(int time);
 	void setName(string name);
 	bool finished();
 	bool run(int chip);     //进程的一次运行，每次运行1秒，若已将时间片花完，则返回TRUE，否则返回FALSE

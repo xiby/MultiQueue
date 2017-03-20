@@ -22,7 +22,7 @@ int main(){
         char str[100];
         _itoa_s(i,str,10);
         string name(str);
-        process tmp(name,i+1,5*(i+1),0);
+        process tmp(name,i+1,5*(i+1));
         pQueue[0]->push(tmp);
     }
 

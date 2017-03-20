@@ -4,7 +4,7 @@
 
 process::process()
 {
-	pName = "process";
+	pName = "process123";
 	arriveTime =0;
 	serveTime=0;
 	runTime = 0;
@@ -18,7 +18,7 @@ process::~process()
 {
 }
 
-process::process(string name, int arrivetime, int servetime,int chip=0):pName(name)
+process::process(string name, int arrivetime, int servetime):pName(name)
 {
 	arriveTime = arrivetime;
 	serveTime = servetime;
@@ -26,11 +26,17 @@ process::process(string name, int arrivetime, int servetime,int chip=0):pName(na
 	rotTime = 0;
 	wrotTime = 0;
 	serveinQueue = 0;
+	//for push
 
 }
 
 string process::getName(){
 	return pName;
+}
+
+void process::setwrotTime(int time)
+{
+	wrotTime = time;
 }
 
 void process::setName(string name){
@@ -58,6 +64,11 @@ int process::getrotTime()
 	return rotTime;
 }
 
+int process::getwrotTime()
+{
+	return wrotTime;
+}
+
 void process::setserveTime(int time)
 {
 	serveTime = time;
@@ -76,6 +87,11 @@ void process::setserveinQueue(int time)
 void process::setendTime(int time)
 {
 	endTime = time;
+}
+
+void process::setrotTime(int time)
+{
+	rotTime = time;
 }
 
 bool process::run(int chip)
