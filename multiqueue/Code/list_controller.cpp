@@ -21,7 +21,7 @@ void list_controller::set_process()
 	string name;
 	int servetime;
 	//Text存储从前段获取的数据
-	process text(name,servetime,system_time);
+	process text(name,servetime, Time);
 	buffer_list.push(text);
 }
 
@@ -43,7 +43,7 @@ void list_controller::push(process new_process)
 	multi_list[0].push(new_process);
 }
 
-int list_controller::which_queue()
+bool list_controller::which_queue(int & QueueIndex)
 {
 	int i;
 	for (i = 0; i < multi_list_count; i++)
@@ -53,7 +53,12 @@ int list_controller::which_queue()
 			break;
 		}
 	}
-	return i;
+	if (i == multi_list_count) {
+		return false;
+	} else {
+		QueueIndex = i;
+		return true;
+	}
 }
 
 void list_controller::sleep_(int time)
@@ -91,4 +96,31 @@ void list_controller::set_exit()
 bool list_controller::is_exit()
 {
 	return exit_flag;
+}
+
+int list_controller::run(int QueueIndex) {
+	process tmp = multi_list[QueueIndex].front();
+	if (tmp.run(getChip(QueueIndex))) {				//时间片已经花完
+		if (tmp.finished()) {						//进程已经完成
+			multi_list[QueueIndex].pop();
+			return 2;
+		} else {									//进程未执行完毕
+			if (QueueIndex < multi_list_count - 1) {
+				multi_list[QueueIndex + 1].push(multi_list[QueueIndex].front());
+				multi_list[QueueIndex].pop();
+				return 1;
+			}
+		}
+	} else {										//时间片未花完
+		if (tmp.finished()) {
+			multi_list[QueueIndex].pop();
+			return 2;
+		} else {
+			return 0;
+		}
+	}
+}
+
+int list_controller::getChip(int QueueIndex) {
+	return Chips[QueueIndex];
 }

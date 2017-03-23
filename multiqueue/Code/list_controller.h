@@ -15,6 +15,9 @@ private:
 	//队列数组，STL
 	int multi_list_count;
 	queue<process> *multi_list;
+
+	int * Chips;				//每个队列时间片构成的数组
+
 	//flags
 	bool exit_flag;
 	bool pause_flag;
@@ -43,11 +46,20 @@ public:
 	//将new_process放入第一级队列
 	void push(process new_process);
 	//判断运行的下一级队列，返回队列的编号
-	int which_queue();
+	bool which_queue(int & QueueIndex);
 	//暂时暂停时间
 	void sleep_(int time);
+
+	int getChip(int QueueIndex);				//根据队列编号确定时间片
+
 	//执行一次（一秒）进程。
-	void run(int);
+	int run(int QueueIndex);
+	/*
+		根据run的返回值来与前端进行通信
+		当返回0时，应该继续在原队列中运行
+		当返回1时，应该移到下一个队列运行
+		当返回2时，进程已经运行结束，应该直接删除
+	*/
 };
 
 #endif // list_controller__
