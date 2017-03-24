@@ -45,7 +45,7 @@ public:
 	process get();
 	//将new_process放入第一级队列
 	void push(process new_process);
-	//判断运行的下一级队列，返回队列的编号
+	//判断运行的下一级队列，QueueIndex返回队列的编号 所有队列为空返回false.
 	bool which_queue(int & QueueIndex);
 	//暂时暂停时间
 	void sleep_(int time);

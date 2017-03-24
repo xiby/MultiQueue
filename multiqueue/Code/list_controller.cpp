@@ -55,7 +55,9 @@ bool list_controller::which_queue(int & QueueIndex)
 	}
 	if (i == multi_list_count) {
 		return false;
-	} else {
+	} 
+	else 
+	{
 		QueueIndex = i;
 		return true;
 	}
