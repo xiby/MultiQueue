@@ -7,6 +7,9 @@ _Enter_::_Enter_():list_control(3)
 void _Enter_::run()
 {
 	int queue_index = 0;
+	//测试使用
+	process a("a", 1, 5);
+	list_control.set_process(a);
 
     while(!list_control.is_exit())
     {
@@ -16,7 +19,7 @@ void _Enter_::run()
            while(list_control.has_new_process())
             {
 				//界面获取数据
-                list_control.push(list_control.get());
+               list_control.push(list_control.get());
 				//push方法，如果new_process为空，需要修改标记位
             }
         }

@@ -18,7 +18,7 @@ list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
 	//初始化标志位
 	exit_flag = false;
 	pause_flag = false;
-	new_prcess_flag = true;		//为了便于测试，以后应该改为false
+	new_prcess_flag = false;
 	//标志位初始化完毕
 
 	//以下均为测试数据
@@ -47,11 +47,20 @@ int list_controller::system_time()
 
 void list_controller::set_process()
 {
+	//以下为测试数据
 	string name = "lalala";
 	int servetime = 0 ;
+	//测试数据结束
 	//Text从窗口获取时间
 	process text(name,servetime, Time);
 	buffer_list.push(text);
+	new_prcess_flag = true;
+}
+
+void list_controller::set_process(process text)
+{
+	buffer_list.push(text);
+	new_prcess_flag = true;
 }
 
 process list_controller::get()
