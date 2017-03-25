@@ -1,6 +1,6 @@
 #include "MultiQueue.h"
 
-_Enter_::_Enter_()
+_Enter_::_Enter_():list_control(3)
 {
 }
 

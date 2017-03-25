@@ -3,13 +3,32 @@
 
 
 
-list_controller::list_controller()
+list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
 {
+	Time = 0;								//系统时间初始化为0
+	multi_list_count = Qnum;
+	Chips = new int[multi_list_count];					//新建数组
+	for (int i = 0; i < multi_list_count; ++i) {
+		Chips[i] = 2 * (i + 1);							//初始化每个队列的时间片
+	}
+
+	this->multi_list = new queue<process>[Qnum];		//初始化进程队列数组
+
+	//初始化标志位
+	exit_flag = false;
+	pause_flag = false;
+	new_prcess_flag = false;
+	//标志位初始化完毕
+
+
+
+
 }
 
 
 list_controller::~list_controller()
 {
+	delete[] Chips;
 }
 
 int list_controller::system_time()
@@ -109,6 +128,10 @@ int list_controller::run(int QueueIndex) {
 			if (QueueIndex < multi_list_count - 1) 
 			{
 				multi_list[QueueIndex + 1].push(multi_list[QueueIndex].front());
+				multi_list[QueueIndex].pop();
+				return 1;
+			} else {
+				multi_list[QueueIndex].push(multi_list[QueueIndex].front());
 				multi_list[QueueIndex].pop();
 				return 1;
 			}

@@ -24,7 +24,7 @@ private:
 	bool new_prcess_flag;
 
 public:
-	list_controller();
+	list_controller(int Qnum);
 	~list_controller();
 
 	//修改系统时间，并返回当前系统时间

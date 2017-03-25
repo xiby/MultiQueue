@@ -1,5 +1,5 @@
 #include<iostream>
-#include"C:\Users\SeverusPeng\Desktop\OS\MultiQueue\multiqueue\Code\MultiQueue.h"
+#include"./MultiQueue.h"
 using namespace std;
 void main()
 {
