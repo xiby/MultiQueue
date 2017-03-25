@@ -1,4 +1,5 @@
 #include "list_controller.h"
+#include<windows.h>
 
 
 
@@ -18,19 +19,15 @@ int list_controller::system_time()
 
 void list_controller::set_process()
 {
-	string name;
-	int servetime;
-	//Text´æ´¢´ÓÇ°¶Î»ñÈ¡µÄÊı¾İ
+	string name = "lalala";
+	int servetime = 0 ;
+	//Textä»çª—å£è·å–æ—¶é—´
 	process text(name,servetime, Time);
 	buffer_list.push(text);
 }
 
 process list_controller::get()
 {
-	if (buffer_list.empty())
-	{
-		return;
-	}
 	process swap;
 	swap = buffer_list.front();
 	buffer_list.pop();
@@ -39,7 +36,7 @@ process list_controller::get()
 
 void list_controller::push(process new_process)
 {
-	//Î´½øĞĞÒì³£ÅĞ¶Ï
+	//Î´ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½Ğ¶ï¿½
 	multi_list[0].push(new_process);
 }
 
@@ -65,7 +62,7 @@ bool list_controller::which_queue(int & QueueIndex)
 
 void list_controller::sleep_(int time)
 {
-	_sleep(1000);
+	Sleep(1000);
 }
 
 bool list_controller::has_new_process()
@@ -102,22 +99,30 @@ bool list_controller::is_exit()
 
 int list_controller::run(int QueueIndex) {
 	process tmp = multi_list[QueueIndex].front();
-	if (tmp.run(getChip(QueueIndex))) {				//Ê±¼äÆ¬ÒÑ¾­»¨Íê
-		if (tmp.finished()) {						//½ø³ÌÒÑ¾­Íê³É
+	if (tmp.run(getChip(QueueIndex))) {				//Ê±ï¿½ï¿½Æ¬ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+		if (tmp.finished()) {						//ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
 			multi_list[QueueIndex].pop();
 			return 2;
-		} else {									//½ø³ÌÎ´Ö´ĞĞÍê±Ï
-			if (QueueIndex < multi_list_count - 1) {
+		} 
+		else 
+		{									//ï¿½ï¿½ï¿½ï¿½Î´Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			if (QueueIndex < multi_list_count - 1) 
+			{
 				multi_list[QueueIndex + 1].push(multi_list[QueueIndex].front());
 				multi_list[QueueIndex].pop();
 				return 1;
 			}
+			//å½“ä¸ºæœ€åä¸€ä¸ªé˜Ÿåˆ—æ—¶æœªå¤„ç†
 		}
-	} else {										//Ê±¼äÆ¬Î´»¨Íê
+	} 
+	else 
+	{										//Ê±ï¿½ï¿½Æ¬Î´ï¿½ï¿½ï¿½ï¿½
 		if (tmp.finished()) {
 			multi_list[QueueIndex].pop();
 			return 2;
-		} else {
+		} 
+		else 
+		{
 			return 0;
 		}
 	}

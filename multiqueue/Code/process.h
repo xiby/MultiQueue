@@ -1,8 +1,9 @@
 #include<string>
 #include<iostream>
 using namespace std;
+
+#ifndef process__
 #define process__
-#ifdef process__
 class process
 {
 public:
