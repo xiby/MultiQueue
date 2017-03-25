@@ -1,6 +1,7 @@
 #include "list_controller.h"
 #include<windows.h>
-
+#include<ctime>			//为了测试加的
+#include<sstream>		//同上
 
 
 list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
@@ -17,10 +18,17 @@ list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
 	//初始化标志位
 	exit_flag = false;
 	pause_flag = false;
-	new_prcess_flag = false;
+	new_prcess_flag = true;		//为了便于测试，以后应该改为false
 	//标志位初始化完毕
 
-
+	//以下均为测试数据
+	//先将1个进程加入到缓冲区中
+	for (int i = 0; i < 1; ++i) {
+		stringstream sname;
+		sname << "process" << i;
+		process tmp(sname.str(), Time, 13 * (i + 1));
+		buffer_list.push(tmp);
+	}
 
 
 }
@@ -29,6 +37,7 @@ list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
 list_controller::~list_controller()
 {
 	delete[] Chips;
+	delete[] multi_list;
 }
 
 int list_controller::system_time()
@@ -50,12 +59,18 @@ process list_controller::get()
 	process swap;
 	swap = buffer_list.front();
 	buffer_list.pop();
+
+	//增加当缓冲区为空的情况的处理
+	//当缓冲区为空时，将new_process_flag置为false;
+	if (buffer_list.empty()) {
+		new_prcess_flag = false;		
+	}
 	return swap;
 }
 
 void list_controller::push(process new_process)
 {
-	//δ�����쳣�ж�
+	//将新进程push到最开始的队列中
 	multi_list[0].push(new_process);
 }
 
@@ -117,9 +132,10 @@ bool list_controller::is_exit()
 }
 
 int list_controller::run(int QueueIndex) {
-	process tmp = multi_list[QueueIndex].front();
-	if (tmp.run(getChip(QueueIndex))) {				//ʱ��Ƭ�Ѿ�����
-		if (tmp.finished()) {						//�����Ѿ�����
+	if (multi_list[QueueIndex].front().run(getChip(QueueIndex))) {				//ʱ��Ƭ�Ѿ�����
+		cout << multi_list[QueueIndex].front().getName() << " served in queue " << QueueIndex << endl;		//为了显示测试结果
+		if (multi_list[QueueIndex].front().finished()) {						//�����Ѿ�����
+			cout << multi_list[QueueIndex].front().getName() << " finished in queue " << QueueIndex << endl;//为了显示测试结果
 			multi_list[QueueIndex].pop();
 			return 2;
 		} 
@@ -135,12 +151,13 @@ int list_controller::run(int QueueIndex) {
 				multi_list[QueueIndex].pop();
 				return 1;
 			}
-			//当为最后一个队列时未处理
 		}
 	} 
 	else 
 	{										//ʱ��Ƭδ����
-		if (tmp.finished()) {
+		cout << multi_list[QueueIndex].front().getName() << " served in queue " << QueueIndex << endl;		//为了显示测试结果
+		if (multi_list[QueueIndex].front().finished()) {
+			cout << multi_list[QueueIndex].front().getName() << " finished in queue " << QueueIndex << endl;//为了显示测试结果
 			multi_list[QueueIndex].pop();
 			return 2;
 		} 
