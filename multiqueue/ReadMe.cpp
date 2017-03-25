@@ -1,2 +1,4 @@
 //This is a branch of SniperChen
-//learning gat.
+<<<<<<< HEAD
+//learning git.
+
