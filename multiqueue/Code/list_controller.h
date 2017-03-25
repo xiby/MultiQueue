@@ -41,6 +41,8 @@ public:
 	bool has_new_process();
 	//用于交互界面调用，响应添加事件，将process放入缓冲池
 	void set_process();
+	//set_process重载，带process参数
+	void set_process(process text);
 	//从缓冲池中获取一个新的process
 	process get();
 	//将new_process放入第一级队列

@@ -43,6 +43,13 @@ void list_controller::set_process()
 	//Text从窗口获取时间
 	process text(name,servetime, Time);
 	buffer_list.push(text);
+	new_prcess_flag = true;
+}
+
+void list_controller::set_process(process text)
+{
+	buffer_list.push(text);
+	new_prcess_flag = true;
 }
 
 process list_controller::get()
@@ -50,6 +57,10 @@ process list_controller::get()
 	process swap;
 	swap = buffer_list.front();
 	buffer_list.pop();
+	if (buffer_list.empty())
+	{
+		new_prcess_flag = false;
+	}
 	return swap;
 }
 
