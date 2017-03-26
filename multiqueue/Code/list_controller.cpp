@@ -1,7 +1,6 @@
 #include "list_controller.h"
 #include<windows.h>
-#include<ctime>			//为了测试加的
-#include<sstream>		//同上
+
 
 
 list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
@@ -20,17 +19,6 @@ list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
 	pause_flag = false;
 	new_prcess_flag = false;
 	//标志位初始化完毕
-
-	//以下均为测试数据
-	//先将1个进程加入到缓冲区中
-	for (int i = 0; i < 1; ++i) {
-		stringstream sname;
-		sname << "process" << i;
-		process tmp(sname.str(), Time, 13 * (i + 1));
-		buffer_list.push(tmp);
-	}
-
-
 }
 
 
