@@ -14,12 +14,11 @@ void _Enter_::run()
 	//以下均为测试数据
 	//先将1个进程加入到缓冲区中
 	//我把一下代码从初始化中移出，为了保持类的封闭性。
-	//存在一个问题 一个需要运行N秒的进程块从运行到结束实际使用了N+1秒
-	for (int i = 0; i < 1; ++i) 
+	for (int i = 0; i < 4; ++i) 
 	{
 		stringstream sname;
 		sname << "process" << i;
-		process tmp(sname.str(), list_control.system_time(), 13 * (i + 1));
+		process tmp(sname.str(), list_control.system_time(), 4 * (i + 1));
 		list_control.set_process(tmp);
 	}
 	//测试代码

@@ -1,4 +1,4 @@
-#include "list_controller.h"
+﻿#include "list_controller.h"
 #include<windows.h>
 
 
@@ -129,15 +129,15 @@ bool list_controller::is_exit()
 }
 
 int list_controller::run(int QueueIndex) {
-	if (multi_list[QueueIndex].front().run(getChip(QueueIndex))) {				//ʱ��Ƭ�Ѿ�����
+	if (multi_list[QueueIndex].front().run(getChip(QueueIndex))) {				//判断时间片是否用完
 		cout << multi_list[QueueIndex].front().getName() << " served in queue " << QueueIndex << endl;		//为了显示测试结果
-		if (multi_list[QueueIndex].front().finished()) {						//�����Ѿ�����
+		if (multi_list[QueueIndex].front().finished()) {						//判断进程是否计算完
 			cout << multi_list[QueueIndex].front().getName() << " finished in queue " << QueueIndex << endl;//为了显示测试结果
 			multi_list[QueueIndex].pop();
 			return 2;
 		} 
 		else 
-		{									//����δִ������
+		{									//判断是否在最后一个队列
 			if (QueueIndex < multi_list_count - 1) 
 			{
 				multi_list[QueueIndex + 1].push(multi_list[QueueIndex].front());
@@ -151,7 +151,7 @@ int list_controller::run(int QueueIndex) {
 		}
 	} 
 	else 
-	{										//ʱ��Ƭδ����
+	{										//时间片没有用完
 		cout << multi_list[QueueIndex].front().getName() << " served in queue " << QueueIndex << endl;		//为了显示测试结果
 		if (multi_list[QueueIndex].front().finished()) {
 			cout << multi_list[QueueIndex].front().getName() << " finished in queue " << QueueIndex << endl;//为了显示测试结果
