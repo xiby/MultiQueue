@@ -1,6 +1,9 @@
-#include "MultiQueue.h"
+#include "./MultiQueue.h"
+#include"pch.h"
+
 #include<ctime>			//为了测试加的
 #include<sstream>		//同上
+
 
 _Enter_::_Enter_():list_control(3)
 {
@@ -16,7 +19,7 @@ void _Enter_::run()
 	//我把一下代码从初始化中移出，为了保持类的封闭性。
 	for (int i = 0; i < 4; ++i) 
 	{
-		stringstream sname;
+		std::stringstream sname;
 		sname << "process" << i;
 		process tmp(sname.str(), list_control.system_time(), 4 * (i + 1));
 		list_control.set_process(tmp);

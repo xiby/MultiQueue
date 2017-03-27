@@ -27,6 +27,8 @@ public:
 	list_controller(int Qnum);
 	~list_controller();
 
+	//获取某个进程队列
+	queue<process> getQueue(int queueIndex);
 	//修改系统时间，并返回当前系统时间
 	int system_time();
 	// 交互界面调用方法，修改pause标记位状态
@@ -60,7 +62,8 @@ public:
 		根据run的返回值来与前端进行通信
 		当返回0时，应该继续在原队列中运行
 		当返回1时，应该移到下一个队列运行
-		当返回2时，进程已经运行结束，应该直接删除
+		当返回2时，应该加入到该队列尾
+		当返回3时，进程已经运行结束，应该直接删除
 	*/
 };
 
