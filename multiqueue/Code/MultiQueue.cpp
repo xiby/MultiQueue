@@ -1,8 +1,12 @@
+
 #include "./MultiQueue.h"
 #include"pch.h"
 
+>>>>>>> a44550d8f9d57391a1f35f57c9489095452877ef
 #include<ctime>			//为了测试加的
 #include<sstream>		//同上
+#include<random>
+/////////////////////////////////////
 
 
 _Enter_::_Enter_():list_control(3)
@@ -26,6 +30,8 @@ void _Enter_::run()
 	}
 	//测试代码
 
+
+	////////////////////////////////////////////////////////////////////////
     while(!list_control.is_exit())
     {
         list_control.system_time();

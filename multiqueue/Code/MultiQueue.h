@@ -1,14 +1,16 @@
-#include"./list_controller.h"
-#include"./process.h"
+#pragma once
+#include"list_controller.h"
+#include"process.h"
+#include "pch.h"
 
 #ifndef _Enter___
 #define _Enter___
 class _Enter_
 {
 public:
-	process  process_contor;   //½ø³Ì¿ØÖÆÄ£¿é
-	list_controller  list_control;         //¶ÓÁÐ¿ØÖÆÄ£¿é
-	//outputer output;                    //ÏÔÊ¾Ä£¿é
+	process  process_contor;   //ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+	list_controller  list_control;         //ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+	//outputer output;                    //ï¿½ï¿½Ê¾Ä£ï¿½ï¿½
 public:
 	_Enter_();
 	void run();
