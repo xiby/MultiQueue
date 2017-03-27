@@ -1,4 +1,6 @@
-﻿#include "list_controller.h"
+﻿#include "pch.h"
+
+#include"list_controller.h"
 #include<windows.h>
 
 
@@ -26,6 +28,12 @@ list_controller::~list_controller()
 {
 	delete[] Chips;
 	delete[] multi_list;
+}
+
+//获取某个进程队列
+queue<process> list_controller::getQueue(int queueIndex)
+{
+	return multi_list[queueIndex];
 }
 
 int list_controller::system_time()
@@ -129,38 +137,34 @@ bool list_controller::is_exit()
 }
 
 int list_controller::run(int QueueIndex) {
-	if (multi_list[QueueIndex].front().run(getChip(QueueIndex))) {				//判断时间片是否用完
-		cout << multi_list[QueueIndex].front().getName() << " served in queue " << QueueIndex << endl;		//为了显示测试结果
+	if (multi_list[QueueIndex].front().run(getChip(QueueIndex))) {				//判断时间片是否用完，如果已将时间片花完，则进行下面的操作
 		if (multi_list[QueueIndex].front().finished()) {						//判断进程是否计算完
-			cout << multi_list[QueueIndex].front().getName() << " finished in queue " << QueueIndex << endl;//为了显示测试结果
 			multi_list[QueueIndex].pop();
-			return 2;
+			return 3;															//若进程已经执行完毕，则返回3
 		} 
-		else 
+		else																	//若还未执行完毕，则进行接下来的判断
 		{									//判断是否在最后一个队列
-			if (QueueIndex < multi_list_count - 1) 
+			if (QueueIndex < multi_list_count - 1)								//如果不在最后一个队列的话，则直接加入到下一个队列的队尾
 			{
 				multi_list[QueueIndex + 1].push(multi_list[QueueIndex].front());
 				multi_list[QueueIndex].pop();
-				return 1;
-			} else {
+				return 1;														//此时返回1
+			} else {															//若在最后一个队列，则返回2
 				multi_list[QueueIndex].push(multi_list[QueueIndex].front());
 				multi_list[QueueIndex].pop();
-				return 1;
+				return 2;
 			}
 		}
 	} 
 	else 
 	{										//时间片没有用完
-		cout << multi_list[QueueIndex].front().getName() << " served in queue " << QueueIndex << endl;		//为了显示测试结果
-		if (multi_list[QueueIndex].front().finished()) {
-			cout << multi_list[QueueIndex].front().getName() << " finished in queue " << QueueIndex << endl;//为了显示测试结果
+		if (multi_list[QueueIndex].front().finished()) {	//但进程已经结束，返回3
 			multi_list[QueueIndex].pop();
-			return 2;
+			return 3;
 		} 
 		else 
 		{
-			return 0;
+			return 0;										//若还要在原队列中继续执行，则返回0
 		}
 	}
 }

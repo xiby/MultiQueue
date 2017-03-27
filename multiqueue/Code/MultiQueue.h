@@ -7,10 +7,10 @@
 #define _Enter___
 class _Enter_
 {
-private:
-	process  process_contor;   //½ø³Ì¿ØÖÆÄ£¿é
-	list_controller  list_control;         //¶ÓÁÐ¿ØÖÆÄ£¿é
-	//outputer output;                    //ÏÔÊ¾Ä£¿é
+public:
+	process  process_contor;   //ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+	list_controller  list_control;         //ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+	//outputer output;                    //ï¿½ï¿½Ê¾Ä£ï¿½ï¿½
 public:
 	_Enter_();
 	void run();
