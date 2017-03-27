@@ -1,6 +1,10 @@
 #include "MultiQueue.h"
+
+/////////////////////////////////////
 #include<ctime>			//为了测试加的
 #include<sstream>		//同上
+#include<random>
+/////////////////////////////////////
 
 _Enter_::_Enter_():list_control(3)
 {
@@ -23,6 +27,8 @@ void _Enter_::run()
 	}
 	//测试代码
 
+
+	////////////////////////////////////////////////////////////////////////
     while(!list_control.is_exit())
     {
         list_control.system_time();

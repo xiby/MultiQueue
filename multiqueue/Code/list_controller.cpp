@@ -110,7 +110,7 @@ bool list_controller::has_new_process()
 
 void list_controller::set_pause()
 {
-	pause_flag = true;
+	pause_flag = !pause_flag;
 }
 
 bool list_controller::is_pause()
@@ -120,7 +120,7 @@ bool list_controller::is_pause()
 
 void list_controller::set_exit()
 {
-	exit_flag = true;
+	exit_flag = !exit_flag;
 }
 
 bool list_controller::is_exit()
