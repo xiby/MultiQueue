@@ -21,8 +21,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>40</width>
-    <height>50</height>
+    <width>600</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>480</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -76,7 +82,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="next">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -89,7 +95,7 @@
      <string>下一步</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="exit">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -102,7 +108,7 @@
      <string>退出</string>
     </property>
    </widget>
-   <widget class="QSlider" name="horizontalSlider">
+   <widget class="QSlider" name="speed">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -173,7 +179,7 @@
      <number>0</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pause">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -189,7 +195,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
+   <widget class="QLCDNumber" name="time">
     <property name="enabled">
      <bool>true</bool>
     </property>
