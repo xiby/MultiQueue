@@ -21,4 +21,7 @@
         void setserveinQueue(int time);
         void setendTime(int time);
         bool run(int chip);     //运行完成则返回true
+
+
+        
     }
