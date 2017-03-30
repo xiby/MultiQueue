@@ -13,8 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    ../Code/list_controller.cpp \
+    ../Code/MultiQueue.cpp \
+    ../Code/process.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    ../Code/list_controller.h \
+    ../Code/MultiQueue.h \
+    ../Code/process.h
 
 FORMS    += mainwindow.ui

@@ -2,7 +2,7 @@
 #include<ctime>			//为了测试加的
 #include<sstream>		//同上
 
-_Enter_::_Enter_():list_control(3)
+_Enter_::_Enter_(QObject *parent):QThread(parent),list_control(3)
 {
 }
 
@@ -18,7 +18,7 @@ void _Enter_::run()
 	{
 		stringstream sname;
 		sname << "process" << i;
-		process tmp(sname.str(), list_control.system_time(), 4 * (i + 1));
+        process tmp(sname.str(), list_control.get_sys_time(), 4 * (i + 1));
 		list_control.set_process(tmp);
 	}
 	//测试代码
@@ -37,13 +37,33 @@ void _Enter_::run()
         }
 		if (list_control.which_queue(queue_index))
 		{
-			list_control.run(queue_index);
+            QString msg="";
+            msg.append(QString::fromStdString(list_control.getlist()[queue_index].front().getName()));
+            msg.append(" is running in ");
+            msg.append(QString::number(queue_index));
+            msg.append("\n");
+            int sgn=list_control.run(queue_index);
+            if(sgn==0){
+
+            }else if(sgn==1){
+
+            }else if(sgn==2){
+
+            }else{
+
+            }
+            emit sendTime(list_control.get_sys_time());
+            emit sendMsg(msg);
 		}
 		
 		//从界面回去时间参数。
 		int get_time=100;
 		list_control.sleep_(get_time);
     }      
+}
+
+void _Enter_::setpause(){
+    list_control.set_pause();
 }
 
 

@@ -27,8 +27,11 @@ public:
 	list_controller(int Qnum);
 	~list_controller();
 
+    queue<process>* getlist();
 	//修改系统时间，并返回当前系统时间
 	int system_time();
+    //只返回当前系统时间
+    int get_sys_time();
 	// 交互界面调用方法，修改pause标记位状态
 	void set_pause();
 	//判断系统是否需要暂停，true=TRUE

@@ -12,13 +12,21 @@ list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
 		Chips[i] = 2 * (i + 1);							//初始化每个队列的时间片
 	}
 
-	this->multi_list = new queue<process>[Qnum];		//初始化进程队列数组
+    multi_list = new queue<process>[Qnum];		//初始化进程队列数组
 
 	//初始化标志位
 	exit_flag = false;
-	pause_flag = false;
+    pause_flag = true;
 	new_prcess_flag = false;
 	//标志位初始化完毕
+}
+
+int list_controller::get_sys_time(){
+    return Time;
+}
+
+queue<process>* list_controller::getlist(){
+    return multi_list;
 }
 
 
@@ -110,7 +118,7 @@ bool list_controller::has_new_process()
 
 void list_controller::set_pause()
 {
-	pause_flag = true;
+    pause_flag = !pause_flag;
 }
 
 bool list_controller::is_pause()
@@ -146,7 +154,7 @@ int list_controller::run(int QueueIndex) {
 			} else {
 				multi_list[QueueIndex].push(multi_list[QueueIndex].front());
 				multi_list[QueueIndex].pop();
-				return 1;
+                return 2;
 			}
 		}
 	} 
@@ -156,7 +164,7 @@ int list_controller::run(int QueueIndex) {
 		if (multi_list[QueueIndex].front().finished()) {
 			cout << multi_list[QueueIndex].front().getName() << " finished in queue " << QueueIndex << endl;//为了显示测试结果
 			multi_list[QueueIndex].pop();
-			return 2;
+            return 3;
 		} 
 		else 
 		{

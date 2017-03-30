@@ -228,9 +228,6 @@
     <property name="value" stdset="0">
      <double>0.000000000000000</double>
     </property>
-    <property name="intValue" stdset="0">
-     <number>0</number>
-    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
