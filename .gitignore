@@ -1,2 +1,10 @@
-*.usr
+*.pro.user
+*.pro.user.18
+*.pro.user.3.2-pre-1
 build-*/
+*.o
+*.exe
+Makefile
+Makefile.Debug
+Makefile.Release
+./Multiqueue_Qt/debug/
