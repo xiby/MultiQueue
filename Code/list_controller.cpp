@@ -36,11 +36,11 @@ int list_controller::system_time()
 void list_controller::set_process()
 {
 	//以下为测试数据
-	string name = "lalala";
-	int servetime = 0 ;
+    string name = "a";
+    int servetime = 15 ;
 	//测试数据结束
 	//Text从窗口获取时间
-	process text(name,servetime, Time);
+    process text(name,Time, servetime);
 	buffer_list.push(text);
 	new_prcess_flag = true;
 }
@@ -93,7 +93,7 @@ bool list_controller::which_queue(int & QueueIndex)
 
 void list_controller::sleep_(int time)
 {
-	Sleep(1000);
+    Sleep(time);
 }
 
 bool list_controller::has_new_process()
@@ -110,7 +110,7 @@ bool list_controller::has_new_process()
 
 void list_controller::set_pause()
 {
-	pause_flag = true;
+    pause_flag = !pause_flag;
 }
 
 bool list_controller::is_pause()
@@ -146,7 +146,7 @@ int list_controller::run(int QueueIndex) {
 			} else {
 				multi_list[QueueIndex].push(multi_list[QueueIndex].front());
 				multi_list[QueueIndex].pop();
-				return 1;
+                return 3;
 			}
 		}
 	} 

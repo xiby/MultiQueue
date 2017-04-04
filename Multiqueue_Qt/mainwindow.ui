@@ -57,15 +57,20 @@
         <attribute name="title">
          <string>多级反馈队列</string>
         </attribute>
-        <widget class="QTextEdit" name="textEdit">
+        <widget class="QWidget" name="horizontalLayoutWidget">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>461</width>
+           <width>451</width>
            <height>371</height>
           </rect>
          </property>
+         <layout class="QHBoxLayout" name="show">
+          <item>
+           <widget class="QTableWidget" name="list0"/>
+          </item>
+         </layout>
         </widget>
        </widget>
        <widget class="QWidget" name="tab_2">
@@ -132,16 +137,6 @@
     </property>
     <property name="text">
      <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>390</y>
-      <width>231</width>
-      <height>51</height>
-     </rect>
     </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView_2">
@@ -230,6 +225,19 @@
     </property>
     <property name="intValue" stdset="0">
      <number>0</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="add_Button">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>390</y>
+      <width>231</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>添加进程</string>
     </property>
    </widget>
   </widget>
