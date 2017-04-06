@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     ui->setupUi(this);
+
     //设置计时器显示位数为3
     ui->time->setDigitCount(3);
     //设置速度滑钮最大值和最小值

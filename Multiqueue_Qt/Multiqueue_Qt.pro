@@ -16,11 +16,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     ../Code/list_controller.cpp \
     ../Code/MultiQueue.cpp \
-    ../Code/process.cpp
+    ../Code/process.cpp \
+    mycustomslider.cpp
 
 HEADERS  += mainwindow.h \
     ../Code/list_controller.h \
     ../Code/MultiQueue.h \
-    ../Code/process.h
+    ../Code/process.h \
+    mycustomslider.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    slider.qrc \
+    test.qrc

@@ -113,7 +113,7 @@
      <string>退出</string>
     </property>
    </widget>
-   <widget class="QSlider" name="speed">
+   <widget class="MyCustomSlider" name="speed">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -244,6 +244,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyCustomSlider</class>
+   <extends>QSlider</extends>
+   <header location="global">mycustomslider.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

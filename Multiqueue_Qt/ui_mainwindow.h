@@ -21,11 +21,11 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
+#include <mycustomslider.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -44,7 +44,7 @@ public:
     QWidget *tab_3;
     QPushButton *next;
     QPushButton *exit;
-    QSlider *speed;
+    MyCustomSlider *speed;
     QLabel *label;
     QGraphicsView *graphicsView_2;
     QLabel *label_2;
@@ -110,7 +110,7 @@ public:
         exit = new QPushButton(centralWidget);
         exit->setObjectName(QStringLiteral("exit"));
         exit->setGeometry(QRect(480, 370, 111, 51));
-        speed = new QSlider(centralWidget);
+        speed = new MyCustomSlider(centralWidget);
         speed->setObjectName(QStringLiteral("speed"));
         speed->setGeometry(QRect(480, 330, 111, 22));
         speed->setOrientation(Qt::Horizontal);
