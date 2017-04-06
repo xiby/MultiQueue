@@ -102,5 +102,9 @@ void _Enter_::set_process()
     list_control.set_process();
 }
 
+void _Enter_::addQueue(){
+    this->list_control.addQueue();
+}
+
 
 

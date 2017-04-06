@@ -45,6 +45,22 @@ void list_controller::set_process()
 	new_prcess_flag = true;
 }
 
+void list_controller::addQueue(){
+    multi_list_count++;             //队列数自增
+    delete[] Chips;
+    Chips = new int[multi_list_count];					//新建数组
+    for (int i = 0; i < multi_list_count; ++i) {
+        Chips[i] = 2 * (i + 1);							//初始化每个队列的时间片
+    }
+    queue<process> *tmp=new queue<process>[multi_list_count];
+    for(int i=0;i<multi_list_count-1;++i){
+        tmp[i]=multi_list[i];
+    }
+    delete multi_list;
+    multi_list=tmp;
+
+}
+
 void list_controller::set_process(process text)
 {
 	buffer_list.push(text);

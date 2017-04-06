@@ -35,6 +35,7 @@ public slots:
     void set_exit();
     //添加新进程
     void set_process();
+    void addQueue();
 
 
 signals:

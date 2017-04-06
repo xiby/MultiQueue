@@ -27,6 +27,8 @@ public:
     list_controller(int Qnum);
 	~list_controller();
 
+    //增加队列数量
+    void addQueue();
 	//修改系统时间，并返回当前系统时间
 	int system_time();
 	// 交互界面调用方法，修改pause标记位状态
