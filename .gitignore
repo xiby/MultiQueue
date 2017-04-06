@@ -2,3 +2,5 @@
 build-*/
 debug/
 release/
+Makefile.*
+*.usr.*
