@@ -51,6 +51,7 @@ public:
     QPushButton *pause;
     QLCDNumber *time;
     QPushButton *add_Button;
+    QPushButton *add_queue_Button;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -129,8 +130,10 @@ public:
         label_2->setIndent(0);
         pause = new QPushButton(centralWidget);
         pause->setObjectName(QStringLiteral("pause"));
-        pause->setGeometry(QRect(480, 160, 111, 51));
+        pause->setGeometry(QRect(500, 160, 61, 61));
+        pause->setStyleSheet(QStringLiteral("background-image: url(:/img/stop.png);"));
         pause->setAutoDefault(false);
+        pause->setFlat(true);
         time = new QLCDNumber(centralWidget);
         time->setObjectName(QStringLiteral("time"));
         time->setEnabled(true);
@@ -145,6 +148,9 @@ public:
         add_Button = new QPushButton(centralWidget);
         add_Button->setObjectName(QStringLiteral("add_Button"));
         add_Button->setGeometry(QRect(0, 390, 231, 51));
+        add_queue_Button = new QPushButton(centralWidget);
+        add_queue_Button->setObjectName(QStringLiteral("add_queue_Button"));
+        add_queue_Button->setGeometry(QRect(230, 390, 231, 51));
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -168,8 +174,9 @@ public:
         exit->setText(QApplication::translate("MainWindow", "\351\200\200\345\207\272", 0));
         label->setText(QApplication::translate("MainWindow", "TextLabel", 0));
         label_2->setText(QApplication::translate("MainWindow", "DoMan", 0));
-        pause->setText(QApplication::translate("MainWindow", "\346\232\202\345\201\234", 0));
+        pause->setText(QString());
         add_Button->setText(QApplication::translate("MainWindow", "\346\267\273\345\212\240\350\277\233\347\250\213", 0));
+        add_queue_Button->setText(QApplication::translate("MainWindow", "\346\267\273\345\212\240\351\230\237\345\210\227", 0));
     } // retranslateUi
 
 };

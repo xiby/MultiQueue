@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>test.qss</file>
+        <file>img/stop.png</file>
+        <file>img/run.png</file>
     </qresource>
 </RCC>

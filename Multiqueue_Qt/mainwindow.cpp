@@ -1,11 +1,16 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "../Code/MultiQueue.h"
+
+
+#include<iostream>
+
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    usingpauseimg=true;        //一开始使用暂停图片
     for(int i=0;i<3;i++)
     {
         row_count[i]=0;
@@ -31,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent) :
     header<<"队列1"<<"队列2"<<"队列3";
     ui->list0->setHorizontalHeaderLabels(header);
 
-
      _Enter_ *process_enter= new _Enter_();
      //传递系统时间饼显示
     connect(process_enter,SIGNAL(signal_time(int)),(ui->time),SLOT(display(int)));
@@ -39,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->speed,SIGNAL(valueChanged(int)),process_enter,SLOT(set_speed(int)));
     //修改暂停标记位
     connect(ui->pause,ui->pause->clicked,process_enter,process_enter->set_pause);
+    connect(ui->pause,ui->pause->clicked,this,this->changeImg);
     //调用单步执行函数
     connect(ui->next,ui->next->clicked,process_enter,process_enter->step_run);
     //添加新的进程，（正在使用测试模块）
@@ -46,6 +51,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->add_Button,ui->add_Button->clicked,this,this->add_process);
     //接收显示参数，调用显示函数（MainWindow中的方法 get_status()）
     connect(process_enter,SIGNAL(signal_runStatus(int,int)),this,SLOT(get_status(int,int)));
+    connect(ui->add_queue_Button,ui->add_queue_Button->clicked,process_enter,process_enter->addQueue);
+    connect(ui->add_queue_Button,ui->add_queue_Button->clicked,this,this->addQueue);
     process_enter->start();
 }
 
@@ -133,4 +140,24 @@ void MainWindow::add_process()
     row_count[0]++;
 }
 
+void MainWindow::addQueue(){        //在界面中增加列
+    ui->list0->insertColumn(ui->list0->columnCount());
+    QStringList head;
+    for(int i=0;i<ui->list0->columnCount();++i){
+        stringstream s;
+        s<<"队列"<<i+1;
+        QString qs=QString::fromStdString(s.str());
+        head<<qs;
+    }
+    ui->list0->setHorizontalHeaderLabels(head);
+}
 
+void MainWindow::changeImg(){
+    usingpauseimg=!usingpauseimg;
+    if(usingpauseimg){
+        ui->pause->setStyleSheet("background-image: url(:/img/stop.png)");
+    }else{
+        ui->pause->setStyleSheet("background-image: url(:/img/run.png)");
+    }
+
+}
