@@ -28,5 +28,4 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 RESOURCES += \
-    slider.qrc \
     test.qrc
