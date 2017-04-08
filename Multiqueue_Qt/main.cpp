@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     QFile testqss("test.qss");
     testqss.open(QFile::ReadOnly);
     a.setStyleSheet(testqss.readAll());
+    testqss.close();
 
     MainWindow w;
     w.show();

@@ -31,6 +31,7 @@ private:
     int row_count[3];
     int colume_count[3];
     bool usingpauseimg;              //为了改变pause按钮而加的变量
+    string generateName();              //产生进程名
 };
 
 #endif // MAINWINDOW_H

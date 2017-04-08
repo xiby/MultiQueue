@@ -3,5 +3,6 @@
         <file>test.qss</file>
         <file>img/stop.png</file>
         <file>img/run.png</file>
+        <file>img/test1.jpg</file>
     </qresource>
 </RCC>
