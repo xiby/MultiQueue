@@ -3,5 +3,8 @@
         <file>test.qss</file>
         <file>img/stop.png</file>
         <file>img/run.png</file>
+        <file>img/background.png</file>
+        <file>img/step_clicked.png</file>
+        <file>img/step_hover.png</file>
     </qresource>
 </RCC>

@@ -32,6 +32,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->list0->setItem(0,0,new QTableWidgetItem("222"));
     ui->list0->setRowCount(16);
     ui->list0->verticalHeader()->setVisible(false);
+    ui->list0->horizontalHeader()->setStyleSheet("QHeaderView::section{background:grey;}");
+
+    ui->Multiqueue->setPalette(QWidget::palette().color(this->backgroundRole()));
+    ui->Multiqueue->setAutoFillBackground(true);
+
     QStringList header ;
     header<<"队列1"<<"队列2"<<"队列3";
     ui->list0->setHorizontalHeaderLabels(header);
@@ -46,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pause,ui->pause->clicked,this,this->changeImg);
     //调用单步执行函数
     connect(ui->next,ui->next->clicked,process_enter,process_enter->step_run);
+    connect(ui->next,ui->next->clicked,this,this->changeImg_step);
     //添加新的进程，（正在使用测试模块）
     connect(ui->add_Button,ui->add_Button->clicked,process_enter,process_enter->set_process);
     connect(ui->add_Button,ui->add_Button->clicked,this,this->add_process);
@@ -155,9 +161,16 @@ void MainWindow::addQueue(){        //在界面中增加列
 void MainWindow::changeImg(){
     usingpauseimg=!usingpauseimg;
     if(usingpauseimg){
-        ui->pause->setStyleSheet("background-image: url(:/img/stop.png)");
+        ui->pause->setStyleSheet("border-image: url(:/img/stop.png)");
     }else{
-        ui->pause->setStyleSheet("background-image: url(:/img/run.png)");
+        ui->pause->setStyleSheet("border-image: url(:/img/run.png)");
     }
 
+}
+
+void MainWindow::changeImg_step()
+{
+    //ui->next->setStyleSheet("border-image: url(:/img/step_clicked.png)");
+   // QSleep(100);
+    //ui->next->setStyleSheet("border-image: url(:/img/step_hover.png)");
 }

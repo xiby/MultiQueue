@@ -24,6 +24,7 @@ private slots:
     void  add_process();
     void addQueue();
     void changeImg();
+    void changeImg_step();
 
 private:
     Ui::MainWindow *ui;

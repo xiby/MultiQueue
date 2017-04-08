@@ -31,11 +31,23 @@
     <height>480</height>
    </size>
   </property>
+  <property name="baseSize">
+   <size>
+    <width>480</width>
+    <height>600</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/img/background.png);</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="gridLayoutWidget">
@@ -50,38 +62,62 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QTabWidget" name="Multiqueue">
+       <property name="acceptDrops">
+        <bool>false</bool>
+       </property>
+       <property name="toolTipDuration">
+        <number>0</number>
+       </property>
+       <property name="statusTip">
+        <string/>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhNone</set>
+       </property>
+       <property name="tabPosition">
+        <enum>QTabWidget::North</enum>
+       </property>
+       <property name="tabShape">
+        <enum>QTabWidget::Rounded</enum>
+       </property>
        <property name="currentIndex">
         <number>0</number>
+       </property>
+       <property name="elideMode">
+        <enum>Qt::ElideLeft</enum>
+       </property>
+       <property name="documentMode">
+        <bool>true</bool>
+       </property>
+       <property name="tabsClosable">
+        <bool>false</bool>
+       </property>
+       <property name="movable">
+        <bool>false</bool>
+       </property>
+       <property name="tabBarAutoHide">
+        <bool>false</bool>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
          <string>多级反馈队列</string>
         </attribute>
-        <widget class="QWidget" name="horizontalLayoutWidget">
+        <widget class="QTableWidget" name="list0">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>451</width>
-           <height>371</height>
+           <width>461</width>
+           <height>369</height>
           </rect>
          </property>
-         <layout class="QHBoxLayout" name="show">
-          <item>
-           <widget class="QTableWidget" name="list0"/>
-          </item>
-         </layout>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
         </widget>
-       </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string>先进先出队列</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="tab_3">
-        <attribute name="title">
-         <string>页</string>
-        </attribute>
        </widget>
       </widget>
      </item>
@@ -91,36 +127,35 @@
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>240</y>
+      <y>140</y>
       <width>111</width>
       <height>51</height>
      </rect>
     </property>
-    <property name="text">
-     <string>下一步</string>
+    <property name="autoFillBackground">
+     <bool>false</bool>
     </property>
-   </widget>
-   <widget class="QPushButton" name="exit">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>370</y>
-      <width>111</width>
-      <height>51</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/img/step_hover.png);</string>
     </property>
     <property name="text">
-     <string>退出</string>
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="MyCustomSlider" name="speed">
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>330</y>
+      <y>360</y>
       <width>111</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/img/background.png);</string>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -130,13 +165,16 @@
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>310</y>
-      <width>54</width>
-      <height>12</height>
+      <y>340</y>
+      <width>71</width>
+      <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/img/background.png);</string>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>Speed</string>
     </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView_2">
@@ -153,7 +191,7 @@
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>430</y>
+      <y>420</y>
       <width>101</width>
       <height>21</height>
      </rect>
@@ -174,28 +212,6 @@
      <number>0</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="pause">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>160</y>
-      <width>61</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/img/stop.png);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="autoDefault">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QLCDNumber" name="time">
     <property name="enabled">
      <bool>true</bool>
@@ -213,6 +229,9 @@
       <width>50</width>
       <height>0</height>
      </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/img/background.png);</string>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
@@ -242,6 +261,9 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(43, 43, 43);</string>
+    </property>
     <property name="text">
      <string>添加进程</string>
     </property>
@@ -255,8 +277,45 @@
       <height>51</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(125, 125, 125);</string>
+    </property>
     <property name="text">
      <string>添加队列</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pause">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>240</y>
+      <width>81</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/img/stop.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="autoRepeat">
+     <bool>false</bool>
+    </property>
+    <property name="autoExclusive">
+     <bool>false</bool>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
