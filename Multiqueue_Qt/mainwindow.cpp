@@ -3,6 +3,8 @@
 
 
 #include<iostream>
+#include<string>
+#include<ctime>
 
 using namespace std;
 
@@ -10,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    srand(time(NULL));
     usingpauseimg=true;        //一开始使用暂停图片
     for(int i=0;i<3;i++)
     {
@@ -18,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     ui->setupUi(this);
+
+
 
     //设置计时器显示位数为3
     ui->time->setDigitCount(3);
@@ -29,17 +34,26 @@ MainWindow::MainWindow(QWidget *parent) :
     //设置表格不可更改
     ui->list0->setColumnCount(3);
     ui->list0->setRowCount(1);
-    ui->list0->setItem(0,0,new QTableWidgetItem("222"));
+    ui->list0->setItem(0,0,new QTableWidgetItem(""));
     ui->list0->setRowCount(16);
     ui->list0->verticalHeader()->setVisible(false);
-    ui->list0->horizontalHeader()->setStyleSheet("QHeaderView::section{background:grey;}");
+    ui->list0->horizontalHeader()->setStyleSheet("QHeaderView::section{background:rgb(226,198,148);}");
 
-    ui->Multiqueue->setPalette(QWidget::palette().color(this->backgroundRole()));
-    ui->Multiqueue->setAutoFillBackground(true);
+    //ui->Multiqueue->setPalette(QWidget::palette().color(this->backgroundRole()));
+    //ui->Multiqueue->setAutoFillBackground(true);
 
     QStringList header ;
     header<<"队列1"<<"队列2"<<"队列3";
     ui->list0->setHorizontalHeaderLabels(header);
+    ui->list0->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->list0->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
+    ui->add_queue_Button->setStyleSheet("QPushButton{border-image:url(:/img/addM.png)}"
+                                        "QPushButton:pressed{border-image:url(:/img/addM_clicked.png)}");
+    ui->add_Button->setStyleSheet("QPushButton{border-image:url(:/img/addP.png)}"
+                                        "QPushButton:pressed{border-image:url(:/img/addP_clicked.png)}");
+    ui->next->setStyleSheet("QPushButton{border-image:url(:/img/step.png)}"
+                                        "QPushButton:pressed{border-image:url(:/img/step_clicked.png)}");
 
      _Enter_ *process_enter= new _Enter_();
      //传递系统时间饼显示
@@ -53,12 +67,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->next,ui->next->clicked,process_enter,process_enter->step_run);
     connect(ui->next,ui->next->clicked,this,this->changeImg_step);
     //添加新的进程，（正在使用测试模块）
-    connect(ui->add_Button,ui->add_Button->clicked,process_enter,process_enter->set_process);
-    connect(ui->add_Button,ui->add_Button->clicked,this,this->add_process);
+    connect(ui->add_Button,ui->add_Button->clicked,this,this->generateName);
+    //connect(ui->add_Button,ui->add_Button->clicked,this,this->add_process);
     //接收显示参数，调用显示函数（MainWindow中的方法 get_status()）
     connect(process_enter,SIGNAL(signal_runStatus(int,int)),this,SLOT(get_status(int,int)));
     connect(ui->add_queue_Button,ui->add_queue_Button->clicked,process_enter,process_enter->addQueue);
     connect(ui->add_queue_Button,ui->add_queue_Button->clicked,this,this->addQueue);
+
+    //将界面中添加进程信号和ui、后台相应的槽函数联系起来
+    connect(this,SIGNAL(add_process_onbs(process)),process_enter,SLOT(set_process(process)));
+    connect(this,SIGNAL(add_process_onui(process)),this,SLOT(add_process(process)));
     process_enter->start();
 }
 
@@ -140,9 +158,9 @@ void MainWindow::get_status(int status, int queue)
     }
 }
 
-void MainWindow::add_process()
+void MainWindow::add_process(process new_process)
 {
-    ui->list0->setItem(row_count[0],0,new QTableWidgetItem("a"));
+    ui->list0->setItem(row_count[0],0,new QTableWidgetItem(QString::fromStdString(new_process.getName())));
     row_count[0]++;
 }
 
@@ -161,16 +179,680 @@ void MainWindow::addQueue(){        //在界面中增加列
 void MainWindow::changeImg(){
     usingpauseimg=!usingpauseimg;
     if(usingpauseimg){
-        ui->pause->setStyleSheet("border-image: url(:/img/stop.png)");
-    }else{
         ui->pause->setStyleSheet("border-image: url(:/img/run.png)");
+    }else{
+        ui->pause->setStyleSheet("border-image: url(:/img/stop.png)");
     }
 
 }
 
-void MainWindow::changeImg_step()
-{
-    //ui->next->setStyleSheet("border-image: url(:/img/step_clicked.png)");
-   // QSleep(100);
-    //ui->next->setStyleSheet("border-image: url(:/img/step_hover.png)");
+void MainWindow::generateName(){
+        int x, y;
+
+        x = rand() % 10;
+
+        y = rand() % 10;//产生随机数
+
+         string xing;
+         string ming;
+         string jinchengming;
+        if (x == 0)
+        {
+             xing = "zhao";
+
+            if (y == 0)
+            {
+                ming = "jian";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                ming = "chen";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                ming = "lian";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                ming = "lei";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                ming = "li";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                ming = "qiang";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                ming = "hong";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                ming = "bin";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                ming = "juan";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                ming = "mei";
+                jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 1)
+        {
+             xing = "qian";
+            if (y == 0)
+            {
+                ming = "jian";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                ming = "chen";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                ming = "lian";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                ming = "lei";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                ming = "li";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                ming = "qiang";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                ming = "hong";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                ming = "bin";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                ming = "juan";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                ming = "mei";
+                jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 2)
+        {
+             xing = "sun";
+            if (y == 0)
+            {
+                ming = "jian";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                ming = "chen";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                ming = "lian";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                ming = "lei";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                ming = "li";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                ming = "qiang";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                ming = "hong";
+                jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                 ming = "bin";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                 ming = "juan";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                 ming = "mei";
+                 jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 3)
+        {
+             xing = "li";
+            if (y == 0)
+            {
+                 ming = "jian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                 ming = "chen";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                 ming = "lian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                 ming = "lei";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                 ming = "li";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                 ming = "qiang";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                 ming = "hong";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                 ming = "bin";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                 ming = "juan";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                 ming = "mei";
+                 jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 4)
+        {
+             xing = "zhou";
+            if (y == 0)
+            {
+                 ming = "jian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                 ming = "chen";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                 ming = "lian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                 ming = "lei";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                 ming = "li";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                 ming = "qiang";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                 ming = "hong";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                 ming = "bin";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                 ming = "juan";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                 ming = "mei";
+                 jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 5)
+        {
+             xing = "wu";
+            if (y == 0)
+            {
+                 ming = "jian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                 ming = "chen";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                 ming = "lian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                 ming = "lei";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                 ming = "li";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                 ming = "qiang";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                 ming = "hong";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                 ming = "bin";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                 ming = "juan";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                 ming = "mei";
+                 jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 6)
+        {
+             xing = "zhen";
+            if (y == 0)
+            {
+                 ming = "jian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                 ming = "chen";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                 ming = "lian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                 ming = "lei";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                 ming = "li";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                 ming = "qiang";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                 ming = "hong";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                 ming = "bin";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                 ming = "juan";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                 ming = "mei";
+                 jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 7)
+        {
+             ming = "wang";
+            if (y == 0)
+            {
+                 ming = "jian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                 ming = "chen";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                 ming = "lian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                 ming = "lei";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                 ming = "li";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                 ming = "qiang";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                 ming = "hong";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                 ming = "bin";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                 ming = "juan";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                 ming = "mei";
+                 jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 8)
+        {
+             xing = "feng";
+            if (y == 0)
+            {
+                 ming = "jian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                 ming = "chen";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                 ming = "lian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                 ming = "lei";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                 ming = "li";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                 ming = "qiang";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                 ming = "hong";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                 ming = "bin";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                 ming = "juan";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                 ming = "mei";
+                 jinchengming = xing + ming;
+
+            }
+
+        }
+        else if (x == 9)
+        {
+             xing = "chen";
+            if (y == 0)
+            {
+                 ming = "jian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 1)
+            {
+                 ming = "chen";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 2)
+            {
+                 ming = "lian";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 3)
+            {
+                 ming = "lei";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 4)
+            {
+                 ming = "li";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 5)
+            {
+                 ming = "qiang";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 6)
+            {
+                 ming = "hong";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 7)
+            {
+                 ming = "bin";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 8)
+            {
+                 ming = "juan";
+                 jinchengming = xing + ming;
+
+            }
+            else if (y == 9)
+            {
+                 ming = "mei";
+                 jinchengming = xing + ming;
+
+            }
+
+        }
+        int arriveTime=int(ui->time->value());
+        int serveTime=(rand()%20)+1;
+        process new_process(jinchengming,arriveTime,serveTime);
+        emit this->add_process_onbs(new_process);
+        emit this->add_process_onui(new_process);
+}
+void MainWindow::changeImg_step(){
+
 }

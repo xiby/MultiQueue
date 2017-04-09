@@ -1,3 +1,8 @@
+QMainWindow#MainWindow
+{
+background-image:url(:/img/background.png);
+}
+
 QSlider::groove:horizontal,QSlider::add-page:horizontal{
 height:3px;
 border-radius:3px;
@@ -42,3 +47,9 @@ margin-right:-4px;
 border-radius:6px;
 background:qradialgradient(spread:pad,cx:0.5,cy:0.5,radius:0.5,fx:0.5,fy:0.5,stop:0.6 #565656,stop:0.8 #565656);
 }
+
+QTabBar::tab {min-width:100px;min-height:40px;color: white;border-image:url(:/img/tab.png)
+}
+QTabBar::tab:!selected {margin-top: 5px;}
+QTabBar::tab:selected {color: black;};
+

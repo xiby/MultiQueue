@@ -3,8 +3,15 @@
         <file>test.qss</file>
         <file>img/stop.png</file>
         <file>img/run.png</file>
+        <file>img/tab.png</file>
+        <file>img/doman.png</file>
+        <file>img/addM.png</file>
         <file>img/background.png</file>
+        <file>img/addM_clicked.png</file>
+        <file>img/addP.png</file>
+        <file>img/timeFrame.png</file>
+        <file>img/step.png</file>
         <file>img/step_clicked.png</file>
-        <file>img/step_hover.png</file>
+        <file>img/addP_clicked.png</file>
     </qresource>
 </RCC>

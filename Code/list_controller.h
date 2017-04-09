@@ -42,7 +42,7 @@ public:
 	//判断缓冲池中是否有新的数据
 	bool has_new_process();
 	//用于交互界面调用，响应添加事件，将process放入缓冲池
-	void set_process();
+    void set_process();
 	//set_process重载，带process参数
 	void set_process(process text);
 	//从缓冲池中获取一个新的process

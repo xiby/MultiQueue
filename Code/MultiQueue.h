@@ -33,9 +33,13 @@ public slots:
     void set_pause();
     //退出
     void set_exit();
-    //添加新进程
-    void set_process();
+
+    //添加新队列
     void addQueue();
+
+private slots:
+    //添加新进程
+    void set_process(process new_process);
 
 
 signals:
