@@ -136,6 +136,9 @@
          <property name="styleSheet">
           <string notr="true">background-image: url(:/img/background.png);</string>
          </property>
+         <property name="sizeAdjustPolicy">
+          <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
         </widget>
        </widget>
       </widget>

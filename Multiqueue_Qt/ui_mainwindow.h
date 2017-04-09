@@ -102,6 +102,7 @@ public:
         list0->setObjectName(QStringLiteral("list0"));
         list0->setGeometry(QRect(0, 0, 461, 369));
         list0->setStyleSheet(QStringLiteral("background-image: url(:/img/background.png);"));
+        list0->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         Multiqueue->addTab(tab, QString());
 
         gridLayout->addWidget(Multiqueue, 0, 0, 1, 1);
