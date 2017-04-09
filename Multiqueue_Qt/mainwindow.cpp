@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //设置速度按钮的初始值
     ui->speed->setValue(1000);
     //设置表格不可更改
+<<<<<<< HEAD
     ui->list0->setColumnCount(15);
     ui->list0->setRowCount(3);
     //ui->list0->setItem(0,0,new QTableWidgetItem("222"));
@@ -45,16 +46,37 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->list0->verticalHeader()->setVisible(true);
     ui->list0->horizontalHeader()->setVisible(false);
     ui->list0->verticalHeader()->setStyleSheet("QHeaderView::section{background:grey;}");
+=======
+    ui->list0->setColumnCount(3);
+    ui->list0->setRowCount(1);
+    ui->list0->setItem(0,0,new QTableWidgetItem(""));
+    ui->list0->setRowCount(16);
+    ui->list0->verticalHeader()->setVisible(false);
+    ui->list0->horizontalHeader()->setStyleSheet("QHeaderView::section{background:rgb(226,198,148);}");
+>>>>>>> b4959c29c1f77a2323c4a99ded93f82d98026cec
 
-    ui->Multiqueue->setPalette(QWidget::palette().color(this->backgroundRole()));
-    ui->Multiqueue->setAutoFillBackground(true);
+    //ui->Multiqueue->setPalette(QWidget::palette().color(this->backgroundRole()));
+    //ui->Multiqueue->setAutoFillBackground(true);
 
     QStringList header ;
     header<<"队列1"<<"队列2"<<"队列3";
+<<<<<<< HEAD
     ui->list0->setVerticalHeaderLabels(header);
 
     ui->list0->setFrameShape(QFrame::NoFrame);      //设置无边框
     ui->list0->setShowGrid(false);                //设置不显示格子线
+=======
+    ui->list0->setHorizontalHeaderLabels(header);
+    ui->list0->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->list0->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
+    ui->add_queue_Button->setStyleSheet("QPushButton{border-image:url(:/img/addM.png)}"
+                                        "QPushButton:pressed{border-image:url(:/img/addM_clicked.png)}");
+    ui->add_Button->setStyleSheet("QPushButton{border-image:url(:/img/addP.png)}"
+                                        "QPushButton:pressed{border-image:url(:/img/addP_clicked.png)}");
+    ui->next->setStyleSheet("QPushButton{border-image:url(:/img/step.png)}"
+                                        "QPushButton:pressed{border-image:url(:/img/step_clicked.png)}");
+>>>>>>> b4959c29c1f77a2323c4a99ded93f82d98026cec
 
      _Enter_ *process_enter= new _Enter_();
      //传递系统时间饼显示
@@ -213,9 +235,9 @@ void MainWindow::addQueue(){        //在界面中增加行
 void MainWindow::changeImg(){
     usingpauseimg=!usingpauseimg;
     if(usingpauseimg){
-        ui->pause->setStyleSheet("border-image: url(:/img/stop.png)");
-    }else{
         ui->pause->setStyleSheet("border-image: url(:/img/run.png)");
+    }else{
+        ui->pause->setStyleSheet("border-image: url(:/img/stop.png)");
     }
 
 }

@@ -47,7 +47,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/img/background.png);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="gridLayoutWidget">
@@ -62,6 +62,19 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QTabWidget" name="Multiqueue">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Adobe Gothic Std B</family>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="acceptDrops">
         <bool>false</bool>
        </property>
@@ -86,6 +99,12 @@
        <property name="currentIndex">
         <number>0</number>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
        <property name="elideMode">
         <enum>Qt::ElideLeft</enum>
        </property>
@@ -103,7 +122,7 @@
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
-         <string>多级反馈队列</string>
+         <string/>
         </attribute>
         <widget class="QTableWidget" name="list0">
          <property name="geometry">
@@ -115,7 +134,7 @@
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">background-image: url(:/img/background.png);</string>
          </property>
         </widget>
        </widget>
@@ -126,17 +145,17 @@
    <widget class="QPushButton" name="next">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>140</y>
-      <width>111</width>
-      <height>51</height>
+      <x>150</x>
+      <y>410</y>
+      <width>50</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/img/step_hover.png);</string>
+     <string notr="true">border-image: url(:/img/step_clicked.png);</string>
     </property>
     <property name="text">
      <string/>
@@ -148,59 +167,33 @@
    <widget class="MyCustomSlider" name="speed">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>360</y>
-      <width>111</width>
+      <x>10</x>
+      <y>390</y>
+      <width>441</width>
       <height>22</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">border-image: url(:/img/background.png);</string>
-    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>340</y>
-      <width>71</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">border-image: url(:/img/background.png);</string>
-    </property>
-    <property name="text">
-     <string>Speed</string>
-    </property>
-   </widget>
-   <widget class="QGraphicsView" name="graphicsView_2">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>390</y>
-      <width>231</width>
-      <height>51</height>
-     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>420</y>
-      <width>101</width>
-      <height>21</height>
+      <y>270</y>
+      <width>100</width>
+      <height>200</height>
      </rect>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/img/doman.png);</string>
+    </property>
     <property name="text">
-     <string>DoMan</string>
+     <string/>
     </property>
     <property name="textFormat">
      <enum>Qt::PlainText</enum>
@@ -218,10 +211,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>20</y>
-      <width>121</width>
-      <height>91</height>
+      <x>460</x>
+      <y>10</y>
+      <width>140</width>
+      <height>100</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -231,16 +224,28 @@
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/img/background.png);</string>
+     <string notr="true">border-image: url(:/img/timeFrame.png);</string>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
     </property>
     <property name="smallDecimalPoint">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="digitCount">
      <number>3</number>
+    </property>
+    <property name="mode">
+     <enum>QLCDNumber::Dec</enum>
     </property>
     <property name="segmentStyle">
      <enum>QLCDNumber::Flat</enum>
@@ -255,42 +260,42 @@
    <widget class="QPushButton" name="add_Button">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>390</y>
-      <width>231</width>
-      <height>51</height>
+      <x>470</x>
+      <y>200</y>
+      <width>120</width>
+      <height>70</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(43, 43, 43);</string>
+     <string notr="true">border-image: url(:/img/addP.png);</string>
     </property>
     <property name="text">
-     <string>添加进程</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="add_queue_Button">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>390</y>
-      <width>231</width>
-      <height>51</height>
+      <x>470</x>
+      <y>120</y>
+      <width>121</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-color: rgb(125, 125, 125);</string>
+     <string notr="true">border-image: url(:/img/addM.png);</string>
     </property>
     <property name="text">
-     <string>添加队列</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="pause">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>240</y>
-      <width>81</width>
-      <height>81</height>
+      <x>30</x>
+      <y>410</y>
+      <width>100</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="mouseTracking">
@@ -300,7 +305,7 @@
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-image: url(:/img/stop.png);</string>
+     <string notr="true">border-image: url(:/img/run.png);</string>
     </property>
     <property name="text">
      <string/>
