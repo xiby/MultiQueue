@@ -96,10 +96,11 @@ void _Enter_::set_exit()
     list_control.set_exit();
 }
 
-void _Enter_::set_process()
+void _Enter_::set_process(process new_process)
 {
+
     //暂时使用此不带参数的方法
-    list_control.set_process();
+    list_control.set_process(new_process);
 }
 
 void _Enter_::addQueue(){

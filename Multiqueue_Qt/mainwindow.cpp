@@ -42,7 +42,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Multiqueue->setPalette(QWidget::palette().color(this->backgroundRole()));
     ui->Multiqueue->setAutoFillBackground(true);
 
->>>>>>> 554547989ea1c70e52f1bfcbd584857ba7bb683f
     QStringList header ;
     header<<"队列1"<<"队列2"<<"队列3";
     ui->list0->setHorizontalHeaderLabels(header);
@@ -59,12 +58,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->next,ui->next->clicked,process_enter,process_enter->step_run);
     connect(ui->next,ui->next->clicked,this,this->changeImg_step);
     //添加新的进程，（正在使用测试模块）
-    connect(ui->add_Button,ui->add_Button->clicked,process_enter,process_enter->set_process);
-    connect(ui->add_Button,ui->add_Button->clicked,this,this->add_process);
+    connect(ui->add_Button,ui->add_Button->clicked,this,this->generateName);
+    //connect(ui->add_Button,ui->add_Button->clicked,this,this->add_process);
     //接收显示参数，调用显示函数（MainWindow中的方法 get_status()）
     connect(process_enter,SIGNAL(signal_runStatus(int,int)),this,SLOT(get_status(int,int)));
     connect(ui->add_queue_Button,ui->add_queue_Button->clicked,process_enter,process_enter->addQueue);
     connect(ui->add_queue_Button,ui->add_queue_Button->clicked,this,this->addQueue);
+
+    //将界面中添加进程信号和ui、后台相应的槽函数联系起来
+    connect(this,SIGNAL(add_process_onbs(process)),process_enter,SLOT(set_process(process)));
+    connect(this,SIGNAL(add_process_onui(process)),this,SLOT(add_process(process)));
     process_enter->start();
 }
 
@@ -146,9 +149,9 @@ void MainWindow::get_status(int status, int queue)
     }
 }
 
-void MainWindow::add_process()
+void MainWindow::add_process(process new_process)
 {
-    ui->list0->setItem(row_count[0],0,new QTableWidgetItem(QString::fromStdString(generateName())));
+    ui->list0->setItem(row_count[0],0,new QTableWidgetItem(QString::fromStdString(new_process.getName())));
     row_count[0]++;
 }
 
@@ -174,8 +177,7 @@ void MainWindow::changeImg(){
 
 }
 
-<<<<<<< HEAD
-string MainWindow::generateName(){
+void MainWindow::generateName(){
         int x, y;
 
         x = rand() % 10;
@@ -836,12 +838,12 @@ string MainWindow::generateName(){
             }
 
         }
-        return jinchengming;
-=======
-void MainWindow::changeImg_step()
-{
-    //ui->next->setStyleSheet("border-image: url(:/img/step_clicked.png)");
-   // QSleep(100);
-    //ui->next->setStyleSheet("border-image: url(:/img/step_hover.png)");
->>>>>>> 554547989ea1c70e52f1bfcbd584857ba7bb683f
+        int arriveTime=int(ui->time->value());
+        int serveTime=(rand()%20)+1;
+        process new_process(jinchengming,arriveTime,serveTime);
+        emit this->add_process_onbs(new_process);
+        emit this->add_process_onui(new_process);
+}
+void MainWindow::changeImg_step(){
+
 }

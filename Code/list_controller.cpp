@@ -35,13 +35,13 @@ int list_controller::system_time()
 
 void list_controller::set_process()
 {
-	//以下为测试数据
+    //以下为测试数据
     string name = "a";
     int servetime = 15 ;
-	//测试数据结束
-	//Text从窗口获取时间
+    //测试数据结束
+    //Text从窗口获取时间
     process text(name,Time, servetime);
-	buffer_list.push(text);
+    buffer_list.push(text);
 	new_prcess_flag = true;
 }
 
