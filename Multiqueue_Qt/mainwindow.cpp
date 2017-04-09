@@ -5,6 +5,7 @@
 #include<iostream>
 #include<string>
 #include<ctime>
+#include<QRegExp>
 
 using namespace std;
 
@@ -14,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     srand(time(NULL));
     usingpauseimg=true;        //一开始使用暂停图片
+    //row_count=new int[3];
+    colume_count=new int[3];
     for(int i=0;i<3;i++)
     {
         row_count[i]=0;
@@ -32,19 +35,26 @@ MainWindow::MainWindow(QWidget *parent) :
     //设置速度按钮的初始值
     ui->speed->setValue(1000);
     //设置表格不可更改
-    ui->list0->setColumnCount(3);
-    ui->list0->setRowCount(1);
-    ui->list0->setItem(0,0,new QTableWidgetItem("222"));
-    ui->list0->setRowCount(16);
-    ui->list0->verticalHeader()->setVisible(false);
-    ui->list0->horizontalHeader()->setStyleSheet("QHeaderView::section{background:grey;}");
+    ui->list0->setColumnCount(15);
+    ui->list0->setRowCount(3);
+    //ui->list0->setItem(0,0,new QTableWidgetItem("222"));
+
+    ui->list0->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    //ui->list0->setRowCount(3);
+    ui->list0->verticalHeader()->setVisible(true);
+    ui->list0->horizontalHeader()->setVisible(false);
+    ui->list0->verticalHeader()->setStyleSheet("QHeaderView::section{background:grey;}");
 
     ui->Multiqueue->setPalette(QWidget::palette().color(this->backgroundRole()));
     ui->Multiqueue->setAutoFillBackground(true);
 
     QStringList header ;
     header<<"队列1"<<"队列2"<<"队列3";
-    ui->list0->setHorizontalHeaderLabels(header);
+    ui->list0->setVerticalHeaderLabels(header);
+
+    ui->list0->setFrameShape(QFrame::NoFrame);      //设置无边框
+    ui->list0->setShowGrid(false);                //设置不显示格子线
 
      _Enter_ *process_enter= new _Enter_();
      //传递系统时间饼显示
@@ -85,64 +95,74 @@ void MainWindow::get_status(int status, int queue)
         当返回2时，进程已经运行结束，应该直接删除
         当返回3时，进程在最后一个队列循环运行
     */
-    QString a;
-    QString buffer;
+    //QString a;
+    QTableWidgetItem* tmp;
+    QTableWidgetItem test;
     switch (status) {
     case 0:
         //点用显示函数
-        //ui->list0->setItem(1,queue,new QTableWidgetItem("继续在原队列"));
         break;
     case 1:
-         a=ui->list0->item(0,queue)->text();
-         ui->list0->setItem(row_count[queue+1],queue+1,new QTableWidgetItem(a));
+        /*
+         a=ui->list0->item(queue,0)->text();
+         a=updateString(a,1);
+         ui->list0->setItem(queue+1,colume_count[queue+1],new QTableWidgetItem(a));
+         */
+
+        tmp=ui->list0->item(queue,0);
+        test=*tmp;
+        ui->list0->setItem(queue+1,colume_count[queue+1],new QTableWidgetItem(test));
+        ui->list0->takeItem(queue,0);
         //移动显示表中的进程
-        for(int i=0;i<row_count[queue];i++)
-        {
-            if(i+1<row_count[queue])
-            {
-               a=ui->list0->item(i+1,queue)->text();
-               ui->list0->setItem(i,queue,new QTableWidgetItem(a));
-            }
-            else
-            {
-               a="";
-               ui->list0->setItem(i,queue,new QTableWidgetItem(a));
-            }
+        for(int i=0;i<colume_count[queue]-1;++i){
+            tmp=ui->list0->item(queue,i+1);
+            test=*tmp;
+            ui->list0->setItem(queue,i,new QTableWidgetItem(test));
+            ui->list0->takeItem(queue,i+1);
         }
-        row_count[queue]--;
-        row_count[queue+1]++;
+        colume_count[queue]--;
+        colume_count[queue+1]++;
+
         break;
     case 2:
-        for(int i=0;i<row_count[queue];i++)
-        {
-            if(i+1<row_count[queue])
-            {
-               a=ui->list0->item(i+1,queue)->text();
-               ui->list0->setItem(i,queue,new QTableWidgetItem(a));
-            }
-            else
-            {
-               a="";
-               ui->list0->setItem(i,queue,new QTableWidgetItem(a));
-            }
+        ui->list0->takeItem(queue,0);
+        for(int i=0;i<colume_count[queue]-1;++i){
+            tmp=ui->list0->item(queue,i+1);
+            test=*tmp;
+            ui->list0->setItem(queue,i,new QTableWidgetItem(test));
+            ui->list0->takeItem(queue,i+1);
         }
-        row_count[queue]--;
+        colume_count[queue]--;
         break;
     case 3:
-        buffer=ui->list0->item(0,queue)->text();
+        //buffer=ui->list0->item(queue,0)->text();
        //移动显示表中的进程
-       for(int i=0;i<row_count[queue];i++)
+        //buffer=updateString(buffer,3);
+        /*
+       for(int i=0;i<colume_count[queue];i++)
        {
-           if(i+1<row_count[queue])
+           if(i+1<colume_count[queue])
            {
-              a=ui->list0->item(i+1,queue)->text();
-              ui->list0->setItem(i,queue,new QTableWidgetItem(a));
+              subWidget=ui->list0->cellWidget(queue,i+1);
+              ui->list0->setCellWidget(queue,i,subWidget);
            }
            else
            {
-              ui->list0->setItem(i,queue,new QTableWidgetItem(buffer));
+              subWidget=ui->list0->cellWidget(queue,i);
+               ui->list0->setCellWidget(queue,i,subWidget);
            }
        }
+       */
+        tmp=ui->list0->item(queue,0);
+        test=*tmp;
+        ui->list0->takeItem(queue,0);
+        for(int i=0;i<colume_count[queue]-1;++i){
+            QTableWidgetItem * tmp=ui->list0->item(queue,i+1);
+            QTableWidgetItem test(*tmp);
+            ui->list0->setItem(queue,i,new QTableWidgetItem(test));
+            ui->list0->takeItem(queue,i+1);
+        }
+        ui->list0->setItem(queue,colume_count[queue]-1,new QTableWidgetItem(test));
         break;
     default:
         break;
@@ -151,20 +171,43 @@ void MainWindow::get_status(int status, int queue)
 
 void MainWindow::add_process(process new_process)
 {
-    ui->list0->setItem(row_count[0],0,new QTableWidgetItem(QString::fromStdString(new_process.getName())));
-    row_count[0]++;
+    QString msg;
+    msg.append(QString::fromStdString(new_process.getName()));
+    msg.append(" ");
+    msg.append(QString::number(new_process.getserveTime()));
+    msg.append(" ");
+    msg.append(QString::number(new_process.getserveinQueue()));
+    QString path=":/img/package/";
+    int num=rand()%18+1;
+    path.append(QString::number(num));
+    path.append(".png");
+    ui->list0->setItem(0,colume_count[0],new QTableWidgetItem(QIcon(path),QString::fromStdString(new_process.getName())));
+    //ui->list0->setItem(0,colume_count[0],new QTableWidgetItem(pro));
+    colume_count[0]++;
 }
 
-void MainWindow::addQueue(){        //在界面中增加列
-    ui->list0->insertColumn(ui->list0->columnCount());
+void MainWindow::addQueue(){        //在界面中增加行
+    ui->list0->insertRow(ui->list0->rowCount());
+    int * tmp=new int[ui->list0->rowCount()];
+    for(int i=0;i<ui->list0->rowCount()-1;++i)
+    {
+        tmp[i]=colume_count[i];
+    }
+    tmp[ui->list0->rowCount()-1]=0;
     QStringList head;
-    for(int i=0;i<ui->list0->columnCount();++i){
+    for(int i=0;i<ui->list0->rowCount();++i){
         stringstream s;
         s<<"队列"<<i+1;
         QString qs=QString::fromStdString(s.str());
         head<<qs;
     }
-    ui->list0->setHorizontalHeaderLabels(head);
+    delete colume_count;
+    colume_count=new int[ui->list0->rowCount()];
+    for(int i=0;i<ui->list0->rowCount();++i){
+        colume_count[i]=tmp[i];
+    }
+    delete tmp;
+    ui->list0->setVerticalHeaderLabels(head);
 }
 
 void MainWindow::changeImg(){
@@ -839,11 +882,28 @@ void MainWindow::generateName(){
 
         }
         int arriveTime=int(ui->time->value());
-        int serveTime=(rand()%20)+1;
+        int serveTime=30;
         process new_process(jinchengming,arriveTime,serveTime);
         emit this->add_process_onbs(new_process);
         emit this->add_process_onui(new_process);
 }
+
+QString MainWindow::updateString(QString pro,int status){
+    QStringList qsl;
+    qsl=pro.split(" ");
+    if(status!=0){
+        qsl.replace(2,QString::number(0));
+    }else{
+        qsl.replace(2,QString::number(qsl.at(2).toInt()+1));
+    }
+    QString tmp;
+    for(int i=0;i<qsl.length();++i){
+        tmp.append(qsl.at(i));
+        tmp.append(" ");
+    }
+    return tmp;
+}
+
 void MainWindow::changeImg_step(){
 
 }

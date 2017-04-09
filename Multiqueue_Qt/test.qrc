@@ -6,5 +6,24 @@
         <file>img/background.png</file>
         <file>img/step_clicked.png</file>
         <file>img/step_hover.png</file>
+        <file>img/package/1.png</file>
+        <file>img/package/2.png</file>
+        <file>img/package/3.png</file>
+        <file>img/package/4.png</file>
+        <file>img/package/5.png</file>
+        <file>img/package/6.png</file>
+        <file>img/package/7.png</file>
+        <file>img/package/8.png</file>
+        <file>img/package/9.png</file>
+        <file>img/package/10.png</file>
+        <file>img/package/11.png</file>
+        <file>img/package/12.png</file>
+        <file>img/package/13.png</file>
+        <file>img/package/14.png</file>
+        <file>img/package/15.png</file>
+        <file>img/package/16.png</file>
+        <file>img/package/17.png</file>
+        <file>img/package/18.png</file>
+        <file>img/package/19.png</file>
     </qresource>
 </RCC>

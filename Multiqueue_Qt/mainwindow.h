@@ -38,9 +38,10 @@ private:
     Ui::MainWindow *ui;
     //用于记录ui列表list0中各队列列的记录数
     int row_count[3];
-    int colume_count[3];
+    int *colume_count;
     bool usingpauseimg;              //为了改变pause按钮而加的变量
     void generateName();              //产生进程名
+    QString updateString(QString pro,int status);   //更新显示的进程信息
 };
 
 #endif // MAINWINDOW_H

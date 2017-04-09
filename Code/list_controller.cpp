@@ -8,15 +8,16 @@ list_controller::list_controller(int Qnum)	//用Qnum初始化队列数
 	Time = 0;								//系统时间初始化为0
 	multi_list_count = Qnum;
 	Chips = new int[multi_list_count];					//新建数组
-	for (int i = 0; i < multi_list_count; ++i) {
-		Chips[i] = 2 * (i + 1);							//初始化每个队列的时间片
+    Chips[0]=2;
+    for (int i = 1; i < multi_list_count; ++i) {
+        Chips[i] = 2 * Chips[i-1];							//初始化每个队列的时间片
 	}
 
 	this->multi_list = new queue<process>[Qnum];		//初始化进程队列数组
 
 	//初始化标志位
 	exit_flag = false;
-	pause_flag = false;
+    pause_flag = true;
 	new_prcess_flag = false;
 	//标志位初始化完毕
 }
@@ -49,8 +50,9 @@ void list_controller::addQueue(){
     multi_list_count++;             //队列数自增
     delete[] Chips;
     Chips = new int[multi_list_count];					//新建数组
-    for (int i = 0; i < multi_list_count; ++i) {
-        Chips[i] = 2 * (i + 1);							//初始化每个队列的时间片
+    Chips[0]=2;
+    for (int i = 1; i < multi_list_count; ++i) {
+        Chips[i] = 2 * Chips[i-1];							//初始化每个队列的时间片
     }
     queue<process> *tmp=new queue<process>[multi_list_count];
     for(int i=0;i<multi_list_count-1;++i){
