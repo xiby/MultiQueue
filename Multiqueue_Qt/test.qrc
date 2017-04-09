@@ -4,7 +4,6 @@
         <file>img/stop.png</file>
         <file>img/run.png</file>
         <file>img/tab.png</file>
-        <file>img/doman.png</file>
         <file>img/addM.png</file>
         <file>img/background.png</file>
         <file>img/addM_clicked.png</file>
@@ -33,5 +32,7 @@
         <file>img/package/18.png</file>
         <file>img/package/19.png</file>
         <file>img/addP_clicked.png</file>
+        <file>img/icon.png</file>
+        <file>img/doman.png</file>
     </qresource>
 </RCC>

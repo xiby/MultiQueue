@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
     testqss.close();
 
     MainWindow w;
+    w.setWindowTitle("Not Windows");
     w.show();
     testqss.close();
 

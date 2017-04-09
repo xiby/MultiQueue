@@ -59,6 +59,9 @@ public:
         MainWindow->setMinimumSize(QSize(600, 480));
         MainWindow->setMaximumSize(QSize(600, 480));
         MainWindow->setBaseSize(QSize(480, 600));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/img/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainWindow->setWindowIcon(icon);
         MainWindow->setLayoutDirection(Qt::LeftToRight);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setStyleSheet(QStringLiteral(""));

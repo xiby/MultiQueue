@@ -34,6 +34,7 @@ private slots:
 
 
 
+
 private:
     Ui::MainWindow *ui;
     //用于记录ui列表list0中各队列列的记录数

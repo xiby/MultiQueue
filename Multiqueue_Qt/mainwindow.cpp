@@ -26,7 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-
     //设置计时器显示位数为3
     ui->time->setDigitCount(3);
     //设置速度滑钮最大值和最小值
@@ -45,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->list0->setRowCount(3);
     ui->list0->verticalHeader()->setVisible(true);
     ui->list0->horizontalHeader()->setVisible(false);
-    ui->list0->horizontalHeader()->setStyleSheet("QHeaderView::section{background:rgb(226,198,148);}");
+    ui->list0->verticalHeader()->setStyleSheet("QHeaderView::section{background:rgb(226,198,148);}");
 
     //ui->Multiqueue->setPalette(QWidget::palette().color(this->backgroundRole()));
     //ui->Multiqueue->setAutoFillBackground(true);
@@ -916,5 +915,6 @@ QString MainWindow::updateString(QString pro,int status){
 }
 
 void MainWindow::changeImg_step(){
-
+    usingpauseimg=false;
+    ui->pause->setStyleSheet("border-image: url(:/img/stop.png)");
 }
